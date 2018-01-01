@@ -1,4 +1,4 @@
-﻿namespace Tomers.WPF.DataVirtualization.Data
+﻿namespace DataVirtualization
 {
     public interface ICacheItemRefreshAction
     {

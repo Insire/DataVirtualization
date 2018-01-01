@@ -1,4 +1,4 @@
-﻿namespace Tomers.WPF.DataVirtualization
+﻿namespace DataVirtualization
 {
     public partial class App
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Tomers.WPF.DataVirtualization.Data
+namespace DataVirtualization
 {
-    public interface IDataVirtualizationItemSponsor
+    public interface IDataVirtualizationItemProvider
     {
         void ExtendItems(IEnumerable<object> items);
         void DeflateItem(object item);

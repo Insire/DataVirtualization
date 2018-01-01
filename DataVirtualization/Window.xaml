@@ -1,28 +1,21 @@
-﻿<Window x:Class="Tomers.WPF.DataVirtualization.Window2"
+﻿<Window x:Class="DataVirtualization.Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:data="clr-namespace:Tomers.WPF.DataVirtualization.Data"
-        xmlns:local="clr-namespace:Tomers.WPF.DataVirtualization"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataVirtualization"
         Title="Demo Window"
         Width="560"
-        Height="640"
-        mc:Ignorable="d">
+        Height="640">
     <Grid>
         <TabControl>
-
             <TabItem x:Name="DataGridView"
                      Header="Data Grid">
-
                 <TabItem.Resources>
                     <CollectionViewSource x:Key="DataGridViewSource"
-                                          CollectionViewType="{x:Type data:DataVirtualizationCollectionView}"
+                                          CollectionViewType="{x:Type local:DataVirtualizationCollectionView}"
                                           Source="{Binding}" />
                 </TabItem.Resources>
 
                 <DockPanel>
-
                     <ListBox Height="256"
                              DockPanel.Dock="Bottom"
                              ItemsSource="{Binding}"
@@ -54,9 +47,7 @@
 
                     <DataGrid ItemsSource="{Binding Source={StaticResource DataGridViewSource}}"
                               VirtualizingStackPanel.IsVirtualizing="True" />
-
                 </DockPanel>
-
             </TabItem>
 
             <TabItem x:Name="ListViewView"
@@ -64,12 +55,11 @@
 
                 <TabItem.Resources>
                     <CollectionViewSource x:Key="ListViewViewSource"
-                                          CollectionViewType="{x:Type data:DataVirtualizationCollectionView}"
+                                          CollectionViewType="{x:Type local:DataVirtualizationCollectionView}"
                                           Source="{Binding}" />
                 </TabItem.Resources>
 
                 <DockPanel>
-
                     <Button Margin="4"
                             Click="Button_Click"
                             Content="Group By Id % 2"
@@ -111,25 +101,19 @@
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Id}"
                                                 Header="Id" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Creation}"
+                                <GridViewColumn DisplayMemberBinding="{Binding ViewModel.Creation}"
                                                 Header="Creation" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Amount}"
+                                <GridViewColumn DisplayMemberBinding="{Binding ViewModel.Amount}"
                                                 Header="Amount" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Name}"
+                                <GridViewColumn DisplayMemberBinding="{Binding ViewModel.Name}"
                                                 Header="Name" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Description}"
+                                <GridViewColumn DisplayMemberBinding="{Binding ViewModel.Description}"
                                                 Header="Description" />
-                                <GridViewColumn DisplayMemberBinding="{Binding IsExtended}"
-                                                Header="IsExtended" />
                             </GridView>
                         </ListView.View>
-
                     </ListView>
-
                 </DockPanel>
-
             </TabItem>
-
         </TabControl>
     </Grid>
 </Window>

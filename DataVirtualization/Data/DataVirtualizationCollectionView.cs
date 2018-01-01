@@ -5,26 +5,27 @@ using System.Runtime.Caching;
 using System.Windows.Data;
 using System.Windows.Threading;
 
-namespace Tomers.WPF.DataVirtualization.Data
+namespace DataVirtualization
 {
     public class DataVirtualizationCollectionView : ListCollectionView, ICacheItemRefreshAction
     {
-        private readonly IDataVirtualizationItemSponsor _sponsor;
-        private readonly HashSet<object> _deferredItems = new HashSet<object>();
+        private readonly IDataVirtualizationItemProvider _sponsor;
+        private readonly HashSet<object> _deferredItems;
         private readonly MemoryCache _cache;
         private readonly CacheItemPolicy _policy;
 
         private bool _isDeferred;
 
-        public DataVirtualizationCollectionView(IList list) : base(list)
+        public DataVirtualizationCollectionView(IList list)
+            : base(list)
         {
-            this._sponsor = list as IDataVirtualizationItemSponsor;
+            _deferredItems = new HashSet<object>();
+            _sponsor = list as IDataVirtualizationItemProvider;
             _cache = new MemoryCache(nameof(DataVirtualizationCollectionView));
             _policy = new CacheItemPolicy()
             {
                 SlidingExpiration = TimeSpan.FromSeconds(30),
                 Priority = CacheItemPriority.Default,
-
             };
         }
 
@@ -41,9 +42,7 @@ namespace Tomers.WPF.DataVirtualization.Data
 
             var item = base.GetItemAt(index);
             if (!_deferredItems.Contains(item))
-            {
                 _deferredItems.Add(item);
-            }
 
             return item;
         }
@@ -60,9 +59,7 @@ namespace Tomers.WPF.DataVirtualization.Data
             {
                 var hashCode = item.GetHashCode();
                 if (!_cache.Contains(hashCode.ToString()))
-                {
                     uniqueSet.Add(item);
-                }
 
                 _cache.Add(new CacheItem(hashCode.ToString(), item), _policy);
             }

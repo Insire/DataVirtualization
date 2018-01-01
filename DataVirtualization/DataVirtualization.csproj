@@ -8,7 +8,7 @@
     <ProjectGuid>{8102706C-AA37-4250-8889-1240FEB6F92F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tomers.WPF.DataVirtualization</RootNamespace>
+    <RootNamespace>DataVirtualization</RootNamespace>
     <AssemblyName>DataVirtualization</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -79,24 +79,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\DataProvider.cs" />
+    <Compile Include="Data\EntryViewModel.cs" />
     <Compile Include="Data\ICacheItemRefreshAction.cs" />
-    <Compile Include="Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Data\IDataProvider.cs" />
+    <Compile Include="Data\IDataVirtualizationItemProvider.cs" />
+    <Compile Include="Data\VirtualizationViewModel.cs" />
+    <Compile Include="Data\VirtualizationViewModelCollection.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Window2.xaml">
+    <Compile Include="Window.cs" />
+    <Page Include="Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DataVirtualizationCollectionView.cs" />
-    <Compile Include="Data\Entry.cs" />
-    <Compile Include="Data\HugeCollection.cs" />
-    <Compile Include="Data\IDataVirtualizationItemSponsor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
