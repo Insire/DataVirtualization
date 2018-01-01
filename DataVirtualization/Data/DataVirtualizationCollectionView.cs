@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace DataVirtualization
 {
-    public class DataVirtualizationCollectionView : ListCollectionView, ICacheItemRefreshAction
+    public class DataVirtualizationCollectionView : ListCollectionView
     {
         private readonly IDataVirtualizationItemProvider _sponsor;
         private readonly HashSet<object> _deferredItems;
@@ -24,9 +24,15 @@ namespace DataVirtualization
             _cache = new MemoryCache(nameof(DataVirtualizationCollectionView));
             _policy = new CacheItemPolicy()
             {
-                SlidingExpiration = TimeSpan.FromSeconds(30),
+                SlidingExpiration = TimeSpan.FromSeconds(3),
                 Priority = CacheItemPriority.Default,
+                RemovedCallback = new CacheEntryRemovedCallback(CacheRemovedCallback)
             };
+        }
+
+        public void CacheRemovedCallback(CacheEntryRemovedArguments arguments)
+        {
+            _sponsor.DeflateItem(arguments.CacheItem.Value);
         }
 
         public override object GetItemAt(int index)
@@ -45,11 +51,6 @@ namespace DataVirtualization
                 _deferredItems.Add(item);
 
             return item;
-        }
-
-        public void Refresh(string removedKey, object expiredValue)
-        {
-            _sponsor.DeflateItem(expiredValue);
         }
 
         private void LoadDeferredItems()

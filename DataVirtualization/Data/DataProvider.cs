@@ -33,5 +33,16 @@ namespace DataVirtualization
             Debug.WriteLine("Creating entry " + id);
             return new EntryViewModel(id);
         }
+
+        public void ClearCache()
+        {
+            _cache.Clear();
+        }
+
+        public void ClearCache(int id)
+        {
+            Debug.WriteLine("Removing entry " + id);
+            _cache.Remove(id);
+        }
     }
 }

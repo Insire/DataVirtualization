@@ -29,7 +29,13 @@ namespace DataVirtualization
         public void DeflateItem(object item)
         {
             var entry = item as VirtualizationViewModel<EntryViewModel>;
-            entry?.Deflate();
+            if (entry == null)
+                return;
+
+            entry.Deflate();
+
+            // remove it from the dataprovider aswell
+            _dataProvider.ClearCache(entry.Id);
         }
     }
 }

@@ -81,7 +81,6 @@
     </ApplicationDefinition>
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="Data\EntryViewModel.cs" />
-    <Compile Include="Data\ICacheItemRefreshAction.cs" />
     <Compile Include="Data\IDataProvider.cs" />
     <Compile Include="Data\IDataVirtualizationItemProvider.cs" />
     <Compile Include="Data\VirtualizationViewModel.cs" />

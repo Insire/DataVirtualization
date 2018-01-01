@@ -82,7 +82,7 @@ namespace DataVirtualization
 
         public void Deflate()
         {
-            ViewModel = null;
+            ViewModel = null; // enable GC
             IsExtended = false;
         }
 
